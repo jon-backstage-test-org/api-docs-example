@@ -7,7 +7,10 @@ readme = "README.md"
 dependencies = ["fastapi", "uvicorn[standard]"]
 
 [project.optional-dependencies]
-test = ["ruff", "black"]
+test = ["ruff", "black", "pytest"]
+
+[project.scripts]
+build-api-docs = "api_docs_example:build_docs"
 
 [build-system]
 requires = ["setuptools >= 43.0.0", "wheel"]

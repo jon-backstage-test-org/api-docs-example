@@ -23,4 +23,5 @@ spec:
   type: openapi
   lifecycle: experimental
   owner: backend
-  definition: "0"
+  definition:
+    $json: ./openapi.json
