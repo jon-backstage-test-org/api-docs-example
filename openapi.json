@@ -1,15 +1,18 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Hello World",
-    "summary": "A simple API for saying hello.",
+    "title": "Example API",
+    "summary": "Provides a simple API to greet people, or entire planets.",
     "version": "1.0"
   },
   "paths": {
     "/": {
       "get": {
-        "summary": "Index",
-        "description": "Return the index page.",
+        "tags": [
+          "greetings"
+        ],
+        "summary": "Greet the world in general.",
+        "description": "Provide a greeting to the entire world, free of prejudice.",
         "operationId": "index__get",
         "responses": {
           "200": {
@@ -28,8 +31,11 @@
     },
     "/hello/{name}": {
       "get": {
-        "summary": "Hello",
-        "description": "Say hello.",
+        "tags": [
+          "greetings"
+        ],
+        "summary": "Greet a specific person.",
+        "description": "Return a greeting addressed to the person in the URL.\n\n- **name**: The forename to address the user by.",
         "operationId": "hello_hello__name__get",
         "parameters": [
           {
