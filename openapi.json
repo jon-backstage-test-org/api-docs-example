@@ -5,38 +5,53 @@
     "summary": "Provides a simple API to greet people, or entire planets.",
     "version": "1.0"
   },
+  "servers": [
+    {
+      "url": "https://hello.example.org/",
+      "description": "Production"
+    },
+    {
+      "url": "https://staging-hello.example.org/",
+      "description": "Staging"
+    },
+    {
+      "url": "http://localhost:8000/",
+      "description": "Local Development"
+    }
+  ],
   "paths": {
-    "/": {
+    "/v1/": {
       "get": {
         "tags": [
           "greetings"
         ],
         "summary": "Greet the world in general.",
         "description": "Provide a greeting to the entire world, free of prejudice.",
-        "operationId": "index__get",
+        "operationId": "index_v1__get",
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "A global greeting",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "title": "Response Index  Get"
-                }
+                  "title": "Response Index V1  Get"
+                },
+                "example": "Hello, world!"
               }
             }
           }
         }
       }
     },
-    "/hello/{name}": {
+    "/v1/hello/{name}": {
       "get": {
         "tags": [
           "greetings"
         ],
         "summary": "Greet a specific person.",
         "description": "Return a greeting addressed to the person in the URL.\n\n- **name**: The forename to address the user by.",
-        "operationId": "hello_hello__name__get",
+        "operationId": "hello_v1_hello__name__get",
         "parameters": [
           {
             "name": "name",
@@ -50,13 +65,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "A greeting",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "string",
-                  "title": "Response Hello Hello  Name  Get"
-                }
+                  "title": "Response Hello V1 Hello  Name  Get"
+                },
+                "example": "Hello, Jon"
               }
             }
           },

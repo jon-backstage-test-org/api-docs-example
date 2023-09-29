@@ -14,16 +14,50 @@ app = FastAPI(
     title="Example API",
     summary="Provides a simple API to greet people, or entire planets.",
     version="1.0",
+    servers=[
+        {
+            "url": "https://hello.example.org",
+            "description": "Production",
+        },
+        {
+            "url": "https://staging-hello.example.org",
+            "description": "Staging",
+        },
+        {
+            "url": "http://localhost:8000",
+            "description": "Local Development",
+        },
+    ],
 )
 
 
-@app.get("/", summary="Greet the world in general.", tags=[Tags.greetings])
+@app.get(
+    "/v1/",
+    summary="Greet the world in general.",
+    tags=[Tags.greetings],
+    responses={
+        200: {
+            "description": "A global greeting",
+            "content": {"application/json": {"example": "Hello, world!"}},
+        },
+    },
+)
 def index() -> str:
     """Provide a greeting to the entire world, free of prejudice."""
     return "Hello, world!"
 
 
-@app.get("/hello/{name}", summary="Greet a specific person.", tags=[Tags.greetings])
+@app.get(
+    "/v1/hello/{name}",
+    summary="Greet a specific person.",
+    tags=[Tags.greetings],
+    responses={
+        200: {
+            "description": "A greeting",
+            "content": {"application/json": {"example": "Hello, Jon"}},
+        },
+    },
+)
 def hello(name: str) -> str:
     """Return a greeting addressed to the person in the URL.
 
