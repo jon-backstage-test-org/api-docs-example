@@ -6,14 +6,22 @@ from fastapi import FastAPI
 class Tags(Enum):
     """A single reference point for defined tags."""
 
-    greetings = "greetings"
+    greetings = "Greetings"
 
+
+tags_metadata = [
+    {
+        "name": Tags.greetings.value,
+        "description": "Ways to greet people.",
+    },
+]
 
 # Disable docs so they're not publicly exposed.
 app = FastAPI(
     title="Example API",
     summary="Provides a simple API to greet people, or entire planets.",
     version="1.0",
+    openapi_tags=tags_metadata,
     servers=[
         {
             "url": "https://hello.example.org",

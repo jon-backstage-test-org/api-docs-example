@@ -23,7 +23,7 @@
     "/v1/": {
       "get": {
         "tags": [
-          "greetings"
+          "Greetings"
         ],
         "summary": "Greet the world in general.",
         "description": "Provide a greeting to the entire world, free of prejudice.",
@@ -47,7 +47,7 @@
     "/v1/hello/{name}": {
       "get": {
         "tags": [
-          "greetings"
+          "Greetings"
         ],
         "summary": "Greet a specific person.",
         "description": "Return a greeting addressed to the person in the URL.\n\n- **name**: The forename to address the user by.",
@@ -139,5 +139,11 @@
         "title": "ValidationError"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Greetings",
+      "description": "Ways to greet people."
+    }
+  ]
 }
