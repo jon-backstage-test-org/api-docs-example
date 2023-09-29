@@ -8,4 +8,4 @@ spec:
   lifecycle: experimental
   owner: backend
   definition:
-    $openapi: ../openapi.json
+    $string: ../openapi.json
