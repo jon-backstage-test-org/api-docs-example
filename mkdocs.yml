@@ -1,4 +1,4 @@
-site_name: ${{ values.name | dump }}
+site_name: api-docs-example
 
 nav:
   - Home: index.md
