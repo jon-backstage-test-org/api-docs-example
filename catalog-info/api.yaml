@@ -3,6 +3,8 @@ kind: API
 metadata:
   name: hello-world-api
   description: An API for saying hello to the whole world
+  annotations:
+    backstage.io/techdocs-ref: dir:..
 spec:
   type: openapi
   lifecycle: experimental
