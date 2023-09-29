@@ -1,6 +1,10 @@
 from enum import Enum
+from typing import Annotated
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.security import HTTPBearer
 
 
 class Tags(Enum):
@@ -14,6 +18,10 @@ tags_metadata = [
         "name": Tags.greetings.value,
         "description": "Ways to greet people.",
     },
+]
+
+permitted_origins = [
+    "http://localhost:7007",
 ]
 
 # Disable docs so they're not publicly exposed.
@@ -37,6 +45,15 @@ app = FastAPI(
         },
     ],
 )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=permitted_origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
+
+auth_scheme = HTTPBearer(bearerFormat="Token")
 
 
 @app.get(
@@ -50,9 +67,12 @@ app = FastAPI(
         },
     },
 )
-def index() -> str:
+def index(token: Annotated[str, Depends(auth_scheme)]) -> str:
     """Provide a greeting to the entire world, free of prejudice."""
-    return "Hello, world!"
+    if token:
+        return "Hello, world!"
+
+    return JSONResponse(status_code=403)
 
 
 @app.get(
@@ -66,12 +86,15 @@ def index() -> str:
         },
     },
 )
-def hello(name: str) -> str:
+def hello(name: str, token: Annotated[str, Depends(auth_scheme)]) -> str:
     """Return a greeting addressed to the person in the URL.
 
     - **name**: The forename to address the user by.
     """
-    return f"Hello, {name}"
+    if token:
+        return f"Hello, {name}"
+
+    return JSONResponse(status_code=403)
 
 
 def build_docs() -> str:

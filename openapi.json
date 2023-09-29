@@ -28,6 +28,11 @@
         "summary": "Greet the world in general.",
         "description": "Provide a greeting to the entire world, free of prejudice.",
         "operationId": "index_v1__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "A global greeting",
@@ -52,6 +57,11 @@
         "summary": "Greet a specific person.",
         "description": "Return a greeting addressed to the person in the URL.\n\n- **name**: The forename to address the user by.",
         "operationId": "hello_v1_hello__name__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "name",
@@ -137,6 +147,13 @@
           "type"
         ],
         "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Token"
       }
     }
   },
